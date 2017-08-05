@@ -1,8 +1,8 @@
 # Beat_the_dealer-series
 
-This little fun project was originally created for my buddy Jason Yi, after I learned he lost 6 digits once in a casino by playing
-Balck Jack against the daeler, and I personally like this guy a lot since he's got an interesting temper I like and he's
-leaving China to US very soon. 
+This little fun project was originally created for my buddy Jason Yi, after I learned he once lost a lot lot of money
+(6 digits if I'm not mistaken?) once in a casino by playing Balck Jack against the daeler,
+and I personally like this guy since he's got an interesting temper and he's leaving China to US very soon. 
 
 However, the reason I'm sharing this project is not only just for fun, also I'd like to encourage whoever wants to accomplish anyting
 in your life, trust yourself, instead of hesitating, just do it, you will get something done in the end. For guys has zero programming 
