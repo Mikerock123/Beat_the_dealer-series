@@ -1,0 +1,127 @@
+import random
+
+# create elements for cards
+suits = ['H','C','S','D'] *4
+
+ranking = ['A','2','3','4','5','6','7','8','9','T','J','Q','K'] *4
+
+dealer_card_val = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, 'T':10, 'J':10, 'Q':10, 'K':10}
+
+player_card_val = {'A':1, '2':10, '3':10, '4':10, '5':10, '6':10, '7':10, '8':10, '9':10, 'T':10, 'J':10, 'Q':10, 'K':10}
+
+#create a deck
+deck = [ ]
+for suit in suits:
+    for rank in ranking:
+        deck. append(suit + rank)
+
+random.shuffle(deck)
+        
+# create a count function for dealer
+def pointcountdealer(mycard):
+    point = 0
+    aceCount = False
+    
+    for i in mycard:
+        point += dealer_card_val[i[1]]
+    
+    return point
+
+#create a count function for player(for cheating for sure :D)
+def pointcountplayer(mycard):
+    point = 0
+    aceCount = False
+    
+    for i in mycard:
+        if i[1] == 'A' and point < 11:
+            aceCount = True
+            point += 11
+        else:
+            point += player_card_val[i[1]]
+        
+    return point
+
+# create a hand for both player
+def createhands(d):
+    player_hand = [ ]
+    dealer_hand = [ ]
+    
+    player_hand.append(d.pop())
+    player_hand.append(d.pop())
+    dealer_hand.append(d.pop())
+    dealer_hand.append(d.pop())
+    
+    while pointcountdealer(dealer_hand) < 17:
+        dealer_hand.append(d.pop())
+        
+    return [player_hand, dealer_hand]
+
+# set up chip_pool
+chip_pool = int(raw_input('How much money you would like to take with? '))
+
+# set up game:
+game_on = raw_input('Ready to crush computer? Please answer y or n: ').lower().startswith('y')
+
+# main game loop
+while game_on:
+    #set up bets
+    bet = int(raw_input('How much you would like to bet: '))
+    while bet > chip_pool:
+        print 'You cannot bet more than you bring'
+        bet = int(raw_input('How much you would like to bet: '))
+    
+    #set up hands
+    hands = createhands(deck)
+    player_hand = hands[0]
+    dealer_hand = hands[1]
+       
+    print str(player_hand) + ' now player has: ' + str(pointcountplayer(player_hand))
+    print str(dealer_hand) + ' now dealer has: ' + str(pointcountdealer(dealer_hand))
+
+# create winning logic
+    if pointcountplayer(player_hand) == 21:
+        print 'Black Jack! Player wins!'
+        chip_pool += bet * 1.5
+        print 'now player has: $' + str(chip_pool)
+        game_on = raw_input('Ready to crush computer? Please answer y or n: ').lower().startswith('y')
+        if not game_on:
+            print 'Dealer bankrupted!!! :( Player cheats, I hate you!'
+
+    elif pointcountdealer(dealer_hand) == 21:
+        print 'Black Jack! Dealer wins!'
+        chip_pool -= bet
+        print 'now player has: $' + str(chip_pool)
+        game_on = raw_input('Ready to crush computer? Please answer y or n: ').lower().startswith('y')
+        if not game_on:
+            print 'Dealer bankrupted!!! :( Player cheats, I hate you!'
+
+    elif pointcountplayer(player_hand) == pointcountdealer(dealer_hand) == 21:
+        print 'Draw game!'
+        print 'now player has: $' + str(chip_pool)
+        game_on = raw_input('Ready to crush computer? Please answer y or n: ').lower().startswith('y')
+        if not game_on:
+            print 'Dealer bankrupted!!! :( Player cheats, I hate you!'
+    
+    else:
+        if pointcountplayer(player_hand) > pointcountdealer(dealer_hand) and pointcountplayer(player_hand) <= 21:
+            print 'Player wins!'
+            chip_pool += bet
+            print 'now player has: $' + str(chip_pool)
+            game_on = raw_input('Ready to crush computer? Please answer y or n: ').lower().startswith('y')
+            if not game_on:
+                print 'Dealer bankrupted!!! :( Player cheats, I hate you!'
+        
+        elif pointcountdealer(dealer_hand) > 21:
+            print 'Dealer busts! Player wins!'
+            chip_pool += bet
+            print 'now player has: $' + str(chip_pool)
+            game_on = raw_input('Ready to crush computer? Please answer y or n: ').lower().startswith('y')
+            if not game_on:
+                print 'Dealer bankrupted!!! :( Player cheats, I hate you!'
+    
+        elif pointcountplayer(player_hand) == pointcountdealer(dealer_hand) and pointcountplayer(player_hand) <= 21:
+            print 'Draw game!'
+            print 'now player has: $' + str(chip_pool)
+            game_on = raw_input('Ready to crush computer? Please answer y or n: ').lower().startswith('y')
+            if not game_on:
+                print 'Dealer bankrupted!!! :(, Player cheats, I hate you!'
