@@ -11,5 +11,7 @@ experiences like me, after months of learning in my spare time, I alreay could d
 In this series, I will include 2 versions, 1 is for higher chances of fetching higher value cards close or equal to 21 
 for players against dealer; 2 is for higher chance the dealer will bust against players. 
 
-This also for anyone who has a long and heavy day, if you would like some outrageous fun against computers, then this is it!
+So, whether you'd like to have your fun based on your paramount ability against computers(ok, it's cheating, I know), 
+or have your fun from the pain you will inflict to the computer, then this might be for you! 
+
 It won't cost you more than 1 minute to recharge yourself, super fast, easy and fun!
